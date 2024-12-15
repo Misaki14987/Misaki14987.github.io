@@ -154,37 +154,44 @@
       }
       detectApple()
     })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="M1sak1's House"><span class="site-name">M1sak1's House</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">攻防世界 - 梅津美治郎</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-12-16T02:00:00.000Z" title="Created 2024-12-16 10:00:00">2024-12-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-12-15T16:33:40.120Z" title="Updated 2024-12-16 00:33:40">2024-12-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%80%86%E5%90%91/">逆向</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="攻防世界 - 梅津美治郎"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="攻防世界-梅津美治郎"><a href="#攻防世界-梅津美治郎" class="headerlink" title="攻防世界 - 梅津美治郎"></a>攻防世界 - 梅津美治郎</h1><p><em>主要考点    _debugbreak</em></p>
-<p>DIE查看，windows32位无壳<img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215234206031.png" alt="image-20241215234206031"></p>
-<p>再扔进IDA里看看<img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215234257529.png" alt="image-20241215234257529"></p>
+<p>DIE查看，windows32位无壳<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215234206031.png" class="" title="image-20241215234206031"></p>
+<p>再扔进IDA里看看<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215234257529.png" class="" title="image-20241215234257529"></p>
 <p>这素主要逻辑</p>
 <p>可以看到使用了<em>GetModuleHandleA</em>和<em>GetProcAddress</em>两个系统函数，学习一下什么用法</p>
 <p><img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215234429746.png" alt="image-20241215234429746"><img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215234458956.png" alt="image-20241215234458956"></p>
 <p>那可以得知<em>GetModuleHandleA</em>是用来调用DLL或文件与程序交互，<em>GetProcAddress</em>是用来加载DLL中的函数的</p>
 <p>分析到下面可以发现<em>strcmp</em>比较两个字符串，如果通过就<strong>puts(“You passed level1!”);</strong></p>
-<p>运行程序把str2中的字符串**r0b0RUlez!**输进去<img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235021819.png" alt="image-20241215235021819"></p>
+<p>运行程序把str2中的字符串**r0b0RUlez!**输进去<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235021819.png" class="" title="image-20241215235021819"></p>
 <p>test1通过，那么test2从哪里冒出来的？查看String后并没有发现</p>
-<p><img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235846956.png" alt="image-20241215235846956"></p>
+<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235846956.png" class="" title="image-20241215235846956">
+
 <p>发现这里调用了一个叫__debugbreak()的函数，搜索后得知debugbreak函数相当于一个int 3指令，引发一个中断，把执行权移交给调试器，如果没有调试器，那就移交给其他异常处理回调函数，如果都没有，那么程序就自己断下来，这里就是为了触发回调函数，如果没有调试器附加，那么debugbreak产生的异常会被AddVectoredExceptionHandler添加的回调函数捕获来处理</p>
 <p>那么test2应该是程序在运行的时候动态生成的，动调一下看看</p>
-<p><img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235304040.png" alt="image-20241215235304040"></p>
+<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235304040.png" class="" title="image-20241215235304040">
+
 <p>发现程序在这里调用了int 3</p>
-<p>回去看看那两个系统函数到底做了什么<img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235552919.png" alt="image-20241215235552919"></p>
+<p>回去看看那两个系统函数到底做了什么<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235552919.png" class="" title="image-20241215235552919"></p>
 <p>这个调用了<strong>kernel32.dll</strong>，以后学学）</p>
-<p><img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235741013.png" alt="image-20241215235741013"></p>
+<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241215235741013.png" class="" title="image-20241215235741013">
+
 <p>这个则调用了kernel32.dll中的<strong>AddVectoredExceptionHandler</strong>，用于注册回调函数</p>
 <p>那么就很显而易见了，这里的<strong>AddVectoredExceptionHandler</strong>注册了<strong>sub_40157F</strong>这个回调函数，当系统捕捉到异常的时候执行中断，跳转到这个回调函数上来运行</p>
-<p><img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241216000548997.png" alt="image-20241216000548997"></p>
+<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241216000548997.png" class="" title="image-20241216000548997">
+
 <blockquote>
 <p>提示输出在这里</p>
 </blockquote>
 <p>查看sub_40157F</p>
-<p><img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241216000638708.png" alt="image-20241216000638708"></p>
+<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241216000638708.png" class="" title="image-20241216000638708">
+
 <p>将输入与dword_40AD98通过sub_401547处理后判断正确与否</p>
-<p><img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241216000800683.png" alt="image-20241216000800683"></p>
+<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241216000800683.png" class="" title="image-20241216000800683">
+
 <blockquote>
 <p>sub_401547</p>
 </blockquote>
-<p><img src="/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241216000837400.png" alt="image-20241216000837400"></p>
+<img src="/2024/12/16/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C_%E6%A2%85%E6%B4%A5%E7%BE%8E%E6%B2%BB%E9%83%8E/image-20241216000837400.png" class="" title="image-20241216000837400">
+
 <blockquote>
 <p>dword_40AD98</p>
 </blockquote>
